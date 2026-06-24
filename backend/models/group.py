@@ -31,3 +31,7 @@ class GroupDetailResponse(BaseModel):
     created_by: str
     created_at: datetime
     members: List[GroupMemberResponse]
+
+
+class AddMemberRequest(BaseModel):
+    user_id: str
