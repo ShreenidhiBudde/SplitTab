@@ -4,6 +4,7 @@ from fastapi import APIRouter, HTTPException, Depends, status
 from database import get_connection, release_connection
 from models.expense import ExpenseCreate, ExpenseResponse
 from auth import get_current_user
+from datetime import date
 
 router = APIRouter(prefix="/groups", tags=["expenses"])
 
@@ -117,7 +118,7 @@ def create_expense(
 
         shares = _compute_equal_splits(body.total_amount, len(body.split_among))
 
-        expense_date = body.expense_date or "CURRENT_DATE"
+        expense_date = body.expense_date or date.today()
         cursor.execute(
             """
             INSERT INTO expenses (group_id, paid_by, description, total_amount, expense_date)
@@ -129,7 +130,7 @@ def create_expense(
                 current_user["sub"],
                 body.description,
                 body.total_amount,
-                body.expense_date,
+                expense_date,
             )
         )
         expense_id = cursor.fetchone()["id"]
