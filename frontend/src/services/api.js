@@ -51,4 +51,6 @@ export const getSuggestions     = (gid)       => api.get(`/groups/${gid}/settlem
 export const getSettlements     = (gid)       => api.get(`/groups/${gid}/settlements`)
 export const recordSettlement   = (gid, data) => api.post(`/groups/${gid}/settlements`, data)
 
+export const searchUsers = (q)        => api.get(`/users/search?q=${encodeURIComponent(q)}`)
+
 export default api

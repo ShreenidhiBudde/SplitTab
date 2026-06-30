@@ -50,7 +50,36 @@ def get_all_users():
         if conn:
             release_connection(conn)
 
-
+@router.get("/search")
+def search_users(q: str, current_user: dict = Depends(get_current_user)):
+    """Search users by username or email. Used by the Add Member flow."""
+    if len(q.strip()) < 2:
+        raise HTTPException(status_code=422, detail="Query must be at least 2 characters")
+    conn = None
+    try:
+        conn = get_connection()
+        cursor = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+        cursor.execute(
+            """
+            SELECT id::TEXT, username, display_name, email
+            FROM users
+            WHERE (username ILIKE %s OR email ILIKE %s)
+              AND id != %s
+            LIMIT 10;
+            """,
+            (f"%{q}%", f"%{q}%", current_user["sub"])
+        )
+        results = [dict(r) for r in cursor.fetchall()]
+        cursor.close()
+        return results
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    finally:
+        if conn:
+            release_connection(conn)
+            
 @router.post("/register", response_model=TokenResponse, status_code=status.HTTP_201_CREATED)
 def register(body: UserRegister):
     conn = None
@@ -170,3 +199,4 @@ def get_me(current_user: dict = Depends(get_current_user)):
     finally:
         if conn:
             release_connection(conn)
+

@@ -13,6 +13,7 @@ import AddExpense       from './pages/AddExpense'
 import Balances         from './pages/Balances'
 import Settlements      from './pages/Settlements'
 import RecordSettlement from './pages/RecordSettlement'
+import AddMember        from './pages/AddMember'
 
 function Layout({ children }) {
   return (
@@ -57,6 +58,9 @@ export default function App() {
       <Route path="/groups/:id/settlements/new" element={
         <ProtectedRoute><Layout><RecordSettlement /></Layout></ProtectedRoute>
       }/>
+      <Route path="/groups/:id/members/add" element={
+        <ProtectedRoute><Layout><AddMember /></Layout></ProtectedRoute>
+      } />
 
       <Route path="*" element={<Navigate to={isAuthenticated ? "/dashboard" : "/login"} replace />} />
     </Routes>
