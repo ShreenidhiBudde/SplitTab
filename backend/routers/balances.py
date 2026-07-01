@@ -96,10 +96,10 @@ def get_balances(group_id: str, current_user: dict = Depends(get_current_user)):
                 m.username,
                 m.display_name,
                 (
-                    COALESCE(p.total_paid,     0) -
-                    COALESCE(o.total_owed,     0) +
-                    COALESCE(r.total_received, 0) -
-                    COALESCE(s.total_sent,     0)
+                    COALESCE(p.total_paid,     0)
+                - COALESCE(o.total_owed,     0)
+                - COALESCE(r.total_received, 0)  
+                + COALESCE(s.total_sent,     0) 
                 ) AS balance
             FROM members m
             LEFT JOIN paid     p ON p.user_id = m.user_id

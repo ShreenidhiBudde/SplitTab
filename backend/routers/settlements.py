@@ -52,8 +52,8 @@ def _get_balances(cursor, group_id: str) -> list[dict]:
             (
                 COALESCE(p.total_paid, 0) -
                 COALESCE(o.total_owed, 0) +
-                COALESCE(r.total_received, 0) -
-                COALESCE(s.total_sent, 0)
+                COALESCE(s.total_sent, 0) -
+                COALESCE(r.total_received, 0)
             ) AS balance
         FROM members m
         LEFT JOIN paid     p ON p.user_id = m.user_id

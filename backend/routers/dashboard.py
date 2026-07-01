@@ -73,8 +73,8 @@ def get_dashboard(current_user: dict = Depends(get_current_user)):
             )
             SELECT
                 (SELECT v FROM paid) -
-                (SELECT v FROM owed) +
-                (SELECT v FROM received) -
+                (SELECT v FROM owed) -
+                (SELECT v FROM received) +
                 (SELECT v FROM sent) AS net;
             """,
             (uid, uid, uid, uid, uid)
