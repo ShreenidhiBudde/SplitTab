@@ -130,7 +130,7 @@ SplitTab/
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/<your-username>/SplitTab.git
+git clone https://github.com/ShreenidhiBudde/SplitTab.git
 cd SplitTab
 ```
 
