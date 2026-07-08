@@ -1,76 +1,75 @@
-# 💸 SplitTab
+# SplitTab
 
-> A Splitwise-inspired full-stack expense sharing platform built with **React, FastAPI, and PostgreSQL** that simplifies group expense management through real-time balance tracking and optimized settlement suggestions.
-
-## ✨ Overview
-
-SplitTab is a full-stack web application that enables users to manage shared expenses within groups. Users can create groups, add members, split expenses equally, monitor real-time balances, record settlements, and receive optimized settlement suggestions using a greedy debt-minimization algorithm.
-
-The project follows a modern client-server architecture with a React frontend, FastAPI backend, and PostgreSQL database.
+A Splitwise-inspired full-stack expense sharing platform built with **React**, **FastAPI**, and **PostgreSQL**. SplitTab enables users to manage shared expenses through group management, equal expense splitting, real-time balance tracking, and optimized settlement suggestions.
 
 ---
 
-## 🚀 Features
+## Overview
 
-### 👤 Authentication
-- Secure user registration and login
+SplitTab is a full-stack web application that simplifies shared expense management. Users can create groups, add members, record expenses, track balances, and settle debts efficiently. The application uses a greedy debt-minimization algorithm to generate optimized settlement suggestions.
+
+---
+
+## Features
+
+### Authentication
+- User registration and login
 - JWT-based authentication
 - Password hashing using bcrypt
 - Protected routes
 
-### 👥 Group Management
-- Create expense groups
-- Add members to groups
-- View all joined groups
+### Group Management
+- Create groups
+- Add members
+- View joined groups
 
-### 💰 Expense Management
+### Expense Management
 - Add shared expenses
 - Equal expense splitting
-- Expense history for every group
+- Expense history
 
-### 📊 Balance Tracking
+### Balance Tracking
 - Real-time balance calculation
 - Shows who owes money and who should receive money
 - Automatic balance updates after expenses and settlements
 
-### 🤝 Settlement System
-- Greedy debt-minimization algorithm for settlement suggestions
-- Record settlements between members
+### Settlements
+- Settlement suggestions using a greedy debt-minimization algorithm
+- Record settlements
 - Settlement history
-- Automatically updates outstanding balances
 
-### 📈 Dashboard
+### Dashboard
 - Total groups
 - Total expenses
 - Total amount spent
 - Amount owed
 - Amount to receive
 - Net balance
-- Recent activity feed
+- Recent activity
 
 ---
 
-# 🛠 Tech Stack
+## Tech Stack
 
-## Frontend
+### Frontend
 - React
 - Vite
 - Axios
 - React Router
 
-## Backend
+### Backend
 - Python
 - FastAPI
 - JWT Authentication
 - bcrypt
 - psycopg2
 
-## Database
+### Database
 - PostgreSQL
 
 ---
 
-# 🏗 System Architecture
+## System Architecture
 
 ```text
                 User
@@ -83,28 +82,27 @@ The project follows a modern client-server architecture with a React frontend, F
                   ▼
           FastAPI Backend
                   │
-          psycopg2 Connection Pool
+      psycopg2 Connection Pool
                   │
                   ▼
-            PostgreSQL Database
+          PostgreSQL Database
 ```
 
 ---
 
-# 📂 Project Structure
+## Project Structure
 
 ```text
 SplitTab/
 │
 ├── backend/
+│   ├── models/
+│   ├── routers/
 │   ├── auth.py
 │   ├── database.py
 │   ├── main.py
-│   ├── models/
-│   ├── routers/
-│   ├── schema.sql
-│   ├── seed.sql
-│   └── requirements.txt
+│   ├── requirements.txt
+│   └── .env
 │
 ├── frontend/
 │   ├── src/
@@ -117,51 +115,57 @@ SplitTab/
 │   ├── package.json
 │   └── vite.config.js
 │
+├── database/
+│   ├── schema.sql
+│   ├── seed.sql
+│   └── queries.sql
+│
 └── README.md
 ```
 
 ---
 
-# ⚙️ Installation
+## Installation
 
-## 1️⃣ Clone the Repository
+### Clone the Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/<your-username>/SplitTab.git
 cd SplitTab
 ```
 
+Replace `<your-username>` with your GitHub username.
+
 ---
 
-## 2️⃣ Backend Setup
+### Backend Setup
 
 ```bash
 cd backend
-
 python -m venv venv
 ```
 
-Activate virtual environment
+Activate the virtual environment.
 
-### Windows
+**Windows**
 
 ```bash
 venv\Scripts\activate
 ```
 
-### Linux / macOS
+**Linux / macOS**
 
 ```bash
 source venv/bin/activate
 ```
 
-Install dependencies
+Install dependencies.
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Run the backend
+Run the backend.
 
 ```bash
 uvicorn main:app --reload
@@ -169,7 +173,7 @@ uvicorn main:app --reload
 
 ---
 
-## 3️⃣ Frontend Setup
+### Frontend Setup
 
 ```bash
 cd frontend
@@ -181,33 +185,23 @@ npm run dev
 
 ---
 
-## 4️⃣ Database Setup
+### Database Setup
 
 Create a PostgreSQL database.
 
-Execute the provided SQL schema.
+Execute:
 
 ```sql
-schema.sql
+database/schema.sql
 ```
 
 (Optional)
 
 ```sql
-seed.sql
+database/seed.sql
 ```
 
-Configure your database credentials inside:
-
-```
-backend/.env
-```
-
----
-
-## 5️⃣ Environment Variables
-
-Backend `.env`
+Create a `.env` file inside `backend/`.
 
 ```env
 DB_HOST=
@@ -223,133 +217,84 @@ ACCESS_TOKEN_EXPIRE_MINUTES=
 
 ---
 
-# 🔗 API Overview
+## API Overview
 
-The backend exposes RESTful APIs for:
+The backend exposes REST APIs for:
 
-### Authentication
-- Register User
-- Login User
-
-### Groups
-- Create Group
-- View Groups
-- Add Members
-
-### Expenses
-- Add Expense
-- Get Expenses
-
-### Balances
-- Get Group Balances
-
-### Settlements
+- Authentication
+- Group Management
+- Expense Management
+- Balance Calculation
 - Settlement Suggestions
-- Record Settlement
-- Settlement History
-
-### Dashboard
+- Settlement Recording
 - Dashboard Summary
-- Recent Activity
 
 ---
 
-# 🧠 Technical Highlights
+## Technical Highlights
 
 - RESTful API architecture
-- JWT authentication
+- JWT-based authentication
 - Password hashing using bcrypt
 - PostgreSQL normalized relational schema
-- UUID-based primary keys
-- NUMERIC data type for accurate monetary calculations
+- UUID primary keys
+- NUMERIC datatype for monetary values
 - psycopg2 connection pooling
 - Dynamic balance computation
 - Greedy debt-minimization algorithm for settlement suggestions
 
 ---
 
-# 📸 Screenshots
+## Screenshots
 
-## Dashboard
+### Login
 
-![Dashboard Screenshot](images/dashboard.png)
-
----
-
-## Groups
-
-![Groups Screenshot](images/groups.png)
+![Login](images/login.png)
 
 ---
 
-## Expenses
+### Dashboard
 
-![Expenses Screenshot](images/expenses.png)
-
----
-
-## Balances
-
-![Balances Screenshot](images/balances.png)
+![Dashboard](images/dashboard.png)
 
 ---
 
-## Settlement Suggestions
+### Groups
 
-![Settlement Screenshot](images/settlements.png)
+![Groups](images/groups.png)
 
 ---
 
-# 🚀 Future Improvements
+### Group Details
 
-- Google OAuth authentication
+![Group Details](images/group-details.png)
+
+---
+
+### Balances
+
+![Balances](images/balances.png)
+
+---
+
+### Settlements
+
+![Settlements](images/settlements.png)
+
+---
+
+## Future Improvements
+
+- Google OAuth
 - Email verification
 - Custom expense splitting
-- Expense categories
-- Group cover images
-- Receipt image upload
-- Receipt OCR
+- Receipt upload
 - Expense analytics
 - Notifications
-- Deployment with Docker
+- Docker deployment
 
 ---
 
-# 📚 Learning Outcomes
-
-This project helped me gain practical experience with:
-
-- Full-stack web development
-- React application architecture
-- FastAPI backend development
-- REST API design
-- JWT authentication
-- Password hashing
-- PostgreSQL database design
-- SQL query optimization
-- Connection pooling
-- State management
-- Real-world balance computation
-- Greedy algorithms for debt minimization
-
----
-
-# 🤝 Contributing
-
-Contributions, issues, and feature suggestions are welcome.
-
-Feel free to fork the repository and submit a pull request.
-
----
-
-# 📄 License
+## License
 
 This project is intended for educational and portfolio purposes.
-
----
-
-## 👨‍💻 Author
-
-**Nidhi B**
-
-If you found this project helpful, consider giving it a ⭐ on GitHub.
