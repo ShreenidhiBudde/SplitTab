@@ -134,8 +134,6 @@ git clone https://github.com/ShreenidhiBudde/SplitTab.git
 cd SplitTab
 ```
 
-Replace `<your-username>` with your GitHub username.
-
 ---
 
 ### Backend Setup
